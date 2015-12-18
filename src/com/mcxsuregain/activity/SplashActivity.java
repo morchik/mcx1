@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 
 import com.mcxsuregain.utils.Constants;
 import com.mcxsuregain.utils.SoapRequests;
@@ -17,7 +18,9 @@ public class SplashActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.d("fgiguv", "hoihb 1");
 		setContentView(R.layout.activity_splash);
+		Log.d("fgiguv", "hoihb 2 !");
 		utils = new Utils(SplashActivity.this);
 		if (utils.isNetConnected()) {
 			new synchInfo().execute();

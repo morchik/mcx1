@@ -43,6 +43,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mcxsuregain.activity.MainTabActivity;
+// import com.mcxsuregain.activity.R;
 import com.mcxsuregain.activity.R;
 
 public class Utils extends Application {

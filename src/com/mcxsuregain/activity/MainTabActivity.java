@@ -75,6 +75,7 @@ public class MainTabActivity extends FragmentActivity {
 				AccountContainer.class, b);
 	}
 
+	@SuppressWarnings("deprecation")
 	private View createTabView(final int id, final String text) {
 		View view = LayoutInflater.from(this).inflate(R.layout.tag_icon, null);
 		ImageView imageView = (ImageView) view.findViewById(R.id.tab_icon);

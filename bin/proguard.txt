@@ -1,0 +1,18 @@
+# view res/layout/activity_main.xml #generated:13
+-keep class android.support.v4.app.FragmentTabHost { <init>(...); }
+
+# view res/layout/home_fragment.xml #generated:38
+-keep class android.support.v4.widget.SwipeRefreshLayout { <init>(...); }
+
+# view AndroidManifest.xml #generated:31
+-keep class com.mcxsuregain.activity.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:35
+-keep class com.mcxsuregain.activity.MainTabActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:39
+-keep class com.mcxsuregain.activity.RegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:21
+-keep class com.mcxsuregain.activity.SplashActivity { <init>(...); }
+

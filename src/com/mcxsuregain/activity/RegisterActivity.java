@@ -94,7 +94,7 @@ public class RegisterActivity extends Activity {
 
 	private void setViews() {
 		utils = new Utils(this);
-		arrayStates = new ArrayList<>();
+		arrayStates = new ArrayList<SpinPojo>();
 		edtFirstname = (EditText) findViewById(R.id.edtFirstname);
 		edtLastName = (EditText) findViewById(R.id.edtlastname);
 		edtEmail = (EditText) findViewById(R.id.edtEmail);

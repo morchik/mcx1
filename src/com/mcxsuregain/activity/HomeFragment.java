@@ -131,7 +131,7 @@ public class HomeFragment extends Fragment {
 			killTimer();
 			comingFromOtherTab = false;
 			listOfData = null;
-			listOfData = new ArrayList<>();
+			listOfData = new ArrayList<ListModel>();
 			listOfData.clear();
 		}
 
@@ -378,6 +378,7 @@ public class HomeFragment extends Fragment {
 			try {
 				String str = utils.getPreference(Constants.marketString);
 				String jsonString = new SoapRequests().serachMarketRequest(str);
+				utils.Toast(str+" "+jsonString);
 				JSONArray jsonArray = new JSONArray(jsonString);
 				ListModel listModel;
 				for (int i = 0; i < jsonArray.length(); i++) {
@@ -422,7 +423,7 @@ public class HomeFragment extends Fragment {
 											.getLatestTime().split("T");
 									String serverDate = utils
 											.getPreference(Constants.server_date);
-									utils.Toast(serverDate+" - "+strCheckNotify[0]);
+									utils.Toast(serverDate+" - "+strCheckNotify[0]); // ????
 									if (strCheckNotify[0].equals(serverDate)) {
 										utils.notification(listOfData.get(0)
 												.getCalltext());
