@@ -1,26 +1,25 @@
 package com.mcxsuregain.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.app.ActionBarActivity;
+// import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import com.mcxsuregain.utils.Constants;
 import com.mcxsuregain.utils.SoapRequests;
 import com.mcxsuregain.utils.Utils;
 
-public class SplashActivity extends ActionBarActivity {
+public class SplashActivity extends Activity {
 
 	Utils utils;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d("fgiguv", "hoihb 1");
 		setContentView(R.layout.activity_splash);
-		Log.d("fgiguv", "hoihb 2 !");
 		utils = new Utils(SplashActivity.this);
 		if (utils.isNetConnected()) {
 			new synchInfo().execute();
@@ -45,7 +44,7 @@ public class SplashActivity extends ActionBarActivity {
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
 			utils.setPreference(Constants.server_date, result);
-			new CountDownTimer(1000, 3000) {
+			new CountDownTimer(1000, 3000) { // ??????
 				@Override
 				public void onTick(long millisUntilFinished) {
 

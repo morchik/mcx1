@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,7 +109,7 @@ public class HomeFragment extends Fragment {
 									new synchMarket().execute();
 								}
 							});
-							timerHandler.postDelayed(this, 5000); // run every
+							timerHandler.postDelayed(this, 20000); // run every 20 sec//??/?????? 
 						}
 					};
 					timerRunnable.run();
@@ -378,7 +379,7 @@ public class HomeFragment extends Fragment {
 			try {
 				String str = utils.getPreference(Constants.marketString);
 				String jsonString = new SoapRequests().serachMarketRequest(str);
-				utils.Toast(str+" "+jsonString);
+				Log.w("", str+" "+jsonString);
 				JSONArray jsonArray = new JSONArray(jsonString);
 				ListModel listModel;
 				for (int i = 0; i < jsonArray.length(); i++) {
@@ -419,11 +420,14 @@ public class HomeFragment extends Fragment {
 										String.valueOf(newSize));
 								if (utils
 										.getBoolPref(Constants.prefIsNotifyEnable)) {
+
+									Log.w("test ", (listOfData.get(0).getLatestTime()));
 									String[] strCheckNotify = listOfData.get(0)
 											.getLatestTime().split("T");
 									String serverDate = utils
 											.getPreference(Constants.server_date);
-									utils.Toast(serverDate+" - "+strCheckNotify[0]); // ????
+									Log.w("test ", serverDate+" - "+strCheckNotify[0]); // ????
+									Log.e("error ", "ttt "+serverDate+" - "+strCheckNotify[0]);
 									if (strCheckNotify[0].equals(serverDate)) {
 										utils.notification(listOfData.get(0)
 												.getCalltext());
