@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment {
 									new synchMarket().execute();
 								}
 							});
-							timerHandler.postDelayed(this, 20000); // run every 20 sec//??/?????? 
+							timerHandler.postDelayed(this, 60000); //!!!!!!! run every 60 sec//??/?????? 
 						}
 					};
 					timerRunnable.run();
@@ -379,7 +379,7 @@ public class HomeFragment extends Fragment {
 			try {
 				String str = utils.getPreference(Constants.marketString);
 				String jsonString = new SoapRequests().serachMarketRequest(str);
-				Log.w("", str+" "+jsonString);
+				Log.v("", str+" "+jsonString);
 				JSONArray jsonArray = new JSONArray(jsonString);
 				ListModel listModel;
 				for (int i = 0; i < jsonArray.length(); i++) {
@@ -396,6 +396,7 @@ public class HomeFragment extends Fragment {
 					listModel.setLatestTime(time);
 					listModel.setIsStopLoss(isStopLoss);
 					listOfData.add(listModel);
+					Log.v("time ", time+" --  setLatestTime(time)");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -412,22 +413,38 @@ public class HomeFragment extends Fragment {
 					public void run() {
 						try {
 							swipeLayout.setRefreshing(false);
+							
+							// start from katakata.code@gmail.com
+							String ldt = listOfData.get(0).getLatestTime();
+							Log.v("test last time from server now", ldt);
+							String ln = utils.getPreference("last_notify"); // datetime (dt) str format
+							Log.v("test last_notify dt was ", ln);
+							if (!ln.equals(ldt)){
+								Log.i("test Do notification now", ln+" "+ldt);
+								utils.notification(listOfData.get(0).getCalltext());
+								utils.setPreference("last_notify",ldt); // update saved dt
+							}
+							// end 12 18 2015
+							
 							newSize = listOfData.size();
 							oldSize = Integer.valueOf(utils
 									.getPreference(Constants.oldPref));
+							Log.d("test newSize ", newSize+" - "+newSize); // ???
 							if (newSize > oldSize) {
 								utils.setPreference(Constants.oldPref,
 										String.valueOf(newSize));
+								Log.d("test getBoolPref ", "utils.getBoolPref(Constants.prefIsNotifyEnable)"); // ???
+								Log.d("test before ", (listOfData.get(0).getLatestTime()));
 								if (utils
 										.getBoolPref(Constants.prefIsNotifyEnable)) {
 
-									Log.w("test ", (listOfData.get(0).getLatestTime()));
+									Log.w("test in if ", (listOfData.get(0).getLatestTime()));
 									String[] strCheckNotify = listOfData.get(0)
 											.getLatestTime().split("T");
 									String serverDate = utils
 											.getPreference(Constants.server_date);
-									Log.w("test ", serverDate+" - "+strCheckNotify[0]); // ????
-									Log.e("error ", "ttt "+serverDate+" - "+strCheckNotify[0]);
+									Log.i("test ", serverDate+" - "+strCheckNotify[0]); // ????
+									Log.i("error ", "ttt "+serverDate+" - "+strCheckNotify[0]);
 									if (strCheckNotify[0].equals(serverDate)) {
 										utils.notification(listOfData.get(0)
 												.getCalltext());
@@ -485,7 +502,7 @@ public class HomeFragment extends Fragment {
 			View vi = convertView;
 			ViewHolder holder;
 			if (convertView == null) {
-				vi = inflater.inflate(R.layout.row_list_item, null);
+				vi = inflater.inflate(R.layout.row_list_item, null); // ????
 				holder = new ViewHolder();
 				holder.textCallType = (TextView) vi
 						.findViewById(R.id.textCallType);
